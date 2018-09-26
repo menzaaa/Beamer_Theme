@@ -2,11 +2,99 @@
 
 \RequirePackage{tikz}
 
-\useinnertheme{hva}
-\useoutertheme{hva}
-\usecolortheme{hva}
+\setbeamertemplate{navigation symbols}{} % nav symbols uitgeschakeld.
+%\setbeamertemplate{blocks}[rounded][shadow=true]  
 
-%\setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{blocks}[rounded][shadow=true]  
+
+%%%%%%% Kleuren
+% Primaire HvA kleuren
+\definecolor{hvablauw}{RGB}{37, 22, 122}
+\definecolor{hvazwart}{RGB}{0, 0, 0}
+\definecolor{hvawit}{RGB}{255, 255, 255}
+% Secundaire HvA kleuren
+\definecolor{hvalichtblauw}{RGB}{0, 167, 211}
+\definecolor{hvadonkerblauw}{RGB}{45, 108, 192}
+\definecolor{hvagroen}{RGB}{112, 161, 0}
+\definecolor{hvabordeauxrood}{RGB}{137, 6, 86}
+\definecolor{hvaoranje}{RGB}{239, 116, 29}
+\definecolor{hvageel}{RGB}{255, 210, 0}
+\definecolor{hvarood}{RGB}{211, 17, 69}
+%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\defbeamertemplate*{title page}{hva}[1][]
+{ 
+	
+   \vskip1.5cm%
+    \begin{beamercolorbox}[wd=15cm,leftskip=1em,sep=8pt,#1]{title page}
+      \usebeamerfont{title}\MakeUppercase{\inserttitle}\par%
+       \usebeamerfont{title}\MakeUppercase{Creating Tomorrow}\par%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=15cm,leftskip=1em,sep=8pt,#1]{subtitle}
+      \usebeamerfont{subtitle}\MakeUppercase{\small{\insertsubtitle}}\par%
+    \end{beamercolorbox}%
+    \vskip0.75cm%
+    \begin{beamercolorbox}[wd=12cm,leftskip=3cm,#1]{author}
+      \usebeamerfont{author}\insertauthor%
+    \end{beamercolorbox}
+     \vskip0.2cm%
+    \begin{beamercolorbox}[wd=12cm,leftskip=3cm,#1]{date}
+      \usebeamerfont{author}\insertdate%
+    \end{beamercolorbox}
+  \vfill
+}
+
+%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{background}{
+
+
+\begin{tikzpicture}
+
+ 	\ifnum\thepage<3
+	\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+	\relax
+	\node[inner sep=0pt] (hvalogo) at (2.5,8.8) {\includegraphics[width=0.37\textwidth]{logo}};
+	%\draw[help lines,step=1mm,gray!20] (0,0) grid (\the\paperwidth,\the\paperheight);
+	%%%%%%% Rij 1 onderin halfjes elke rij gaat omhoog.
+	\draw [draw=white,fill=hvawit,opacity=1,line width=0.1mm] (4mm,4mm) -- (34mm,4mm) -- (4mm,21.6mm)  -- cycle ; % blokje 1
+	
+	%%%%%%% Rij 2 
+	\draw [draw=white,fill=hvawit,opacity=1,line width=0.1mm] (4mm,21.6mm) -- (34mm,4mm) -- (34mm,39.2mm)  -- cycle; % blokje 5
+	\draw [draw=white,fill=hvawit,opacity=1,line width=0.1mm] (34mm,4mm) -- (34mm,39.2mm) -- (64mm,21.6mm)  -- cycle; % blokje 6
+	
+	%%%%%%% Rij 3 
+	\draw [draw=white,fill=hvablauw!10,opacity=1,line width=0.1mm] (4mm,21.6mm) -- (4mm,57mm) -- (34mm,39.2mm)  -- cycle; % blokje 9
+	\draw [draw=white,fill=lightgray!40,opacity=1,line width=0.1mm] (34mm,39.2mm) -- (64mm,57mm) -- (64mm,21.6mm)  -- cycle; % blokje 10
+	\draw [draw=white,fill=lightgray!40,opacity=1,line width=0.1mm] (64mm,21.6mm) -- (64mm,57mm) -- (94mm,39.2mm)  -- cycle; % blokje 11
+	\draw [draw=white,fill=hvablauw!90,opacity=1,line width=0.1mm] (94mm,39.2mm) -- (124mm,57mm) -- (124mm,21.6mm)  -- cycle; % blokje 12
+	%%%%%%% Rij 4
+	\draw [draw=white,fill=lightgray!40,opacity=1,line width=0.1mm] (64mm,57mm) -- (94mm,74.4mm) -- (94mm,39.2mm)  -- cycle; % blokje 13
+	
+	\begin{scope}
+    	\clip(34mm,4mm) -- (94mm,39.2mm) -- (124mm,21.6mm) -- (124mm,4mm) -- (34mm,4mm);
+	\draw [draw=white,fill=lightgray,line width=0.1mm] (34mm,4mm) -- (64mm,4mm) -- (64mm,21.6mm)  -- cycle ; % blokje 2
+   	\node(amsterdambg) at (84mm,16mm) {\includegraphics[width=0.89\textwidth]{bg}};
+	\draw [draw=white,line width=0.1mm] (34mm,4mm) -- (64mm,4mm) -- (64mm,21.6mm)  -- cycle ; % blokje 2
+	\draw [draw=white,line width=0.1mm] (64mm,4mm) -- (94mm,4mm) -- (64mm,21.6mm)  -- cycle ; % blokje 3
+	\draw [draw=white,line width=0.1mm] (94mm,4mm) -- (124mm,4mm) -- (124mm,21.6mm)  -- cycle ; % blokje 4
+	\draw [draw=white,line width=0.1mm] (64mm,21.6mm) -- (94mm,4mm) -- (94mm,39.2mm)  -- cycle; % blokje 7
+	\draw [draw=white,line width=0.1mm] (94mm,4mm) -- (94mm,39.2mm) -- (124mm,21.6mm)  -- cycle; % blokje 8
+	\end{scope}
+	\fi
+	
+	
+	\ifnum\thepage<2
+	\draw [draw=white,fill=hvablauw!10,opacity=1,line width=0.1mm] (34mm,4mm) -- (64mm,4mm) -- (64mm,21.6mm)  -- cycle ; % blokje 2
+	\draw [draw=white,fill=hvablauw!30,opacity=1,line width=0.1mm] (64mm,4mm) -- (94mm,4mm) -- (64mm,21.6mm)  -- cycle ; % blokje 3
+	\draw [draw=white,fill=hvablauw!50,opacity=1,line width=0.1mm] (94mm,4mm) -- (124mm,4mm) -- (124mm,21.6mm)  -- cycle ; % blokje 4
+	\draw [draw=white,fill=hvablauw!70,opacity=1,line width=0.1mm] (64mm,21.6mm) -- (94mm,4mm) -- (94mm,39.2mm)  -- cycle; % blokje 7
+	\draw [draw=white,fill=hvablauw!90,opacity=1,line width=0.1mm] (94mm,4mm) -- (94mm,39.2mm) -- (124mm,21.6mm)  -- cycle; % blokje 8
+	
+	\fi
+\end{tikzpicture}
+
+ }
 
 \mode<all>
