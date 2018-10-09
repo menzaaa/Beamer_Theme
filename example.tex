@@ -1,0 +1,138 @@
+\documentclass[pdf]{beamer}
+
+\usetheme[]{HvA}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+
+\author{Patrick Hendriks}
+\title{TITEL VAN DE PRESENTATIE}
+\subtitle{SUBHEADING VAN PRESENTATIE}
+\institute{Hogeschool van Amsterdam}
+\date{\today}
+
+\begin{document}
+
+% Title page (plain in order to hide regular background and footline)
+\frame{\titlepage}
+
+\begin{frame}
+	\frametitle{Inhoudsopgave}
+	\tableofcontents
+\end{frame}
+
+
+\section{Example Content}
+
+\begin{frame}{\insertsectionhead}{Some lists}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{enumerate}
+				\item Foo
+				\item Bar
+				\begin{enumerate}
+					\item test
+					\item hello world
+					\begin{enumerate}
+						\item more levels
+					\end{enumerate}
+				\end{enumerate}
+				\item Baz
+			\end{enumerate}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Foo
+				\item Bar
+				\begin{itemize}
+					\item test
+					\item hello world
+					\begin{itemize}
+						\item more levels
+					\end{itemize}
+				\end{itemize}
+				\item Baz
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+{ % Use a frametitle with title and subtitle on one line to safe space
+	\setbeamertemplate{frametitle}[HvA oneline]
+
+	\begin{frame}{Block elements}{With subtitle on the same line as title}
+		\begin{columns}[t]
+			\begin{column}{0.45\textwidth}
+				\begin{example}[The usual]
+					Hello World
+				\end{example}
+				\begin{theorem}[Stuff is hard]
+					content...
+				\end{theorem}
+				\begin{corollary}
+					content...
+				\end{corollary}
+			\end{column}
+			\begin{column}{0.45\textwidth}
+				\begin{fact}
+					content...
+				\end{fact}
+				\begin{lemma}
+					content...
+				\end{lemma}
+				\begin{proof}[Proof \alert{this!}]
+					trivial
+				\end{proof}
+			\end{column}
+		\end{columns}
+	\end{frame}
+}
+
+\begin{frame}{Even more boxes}
+
+	\begin{definition}[of a definition]
+		A \alert{definition} is what is in such a box.
+	\end{definition}
+	\begin{block}{Title of the block element}
+		Just another block with content.
+	\end{block}
+	\begin{alertblock}{Attention!}
+		content...
+	\end{alertblock}
+	
+\end{frame}
+
+\section{Plain frames are really boring}
+
+\begin{frame}[plain]
+
+	A plain frame with a figure and a table.
+
+	\vfill
+
+	\begin{figure}
+		\caption{HvA}\label{fig:hva-logo}
+		\insertlogo
+	\end{figure}
+	
+	\begin{table}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			A & B & C \\
+			\hline
+			D & E & F \\
+			\hline
+		\end{tabular}
+		\caption{A table without content}\label{tab:nonsense}
+	\end{table}
+\end{frame}
+
+\section{Section titles show up in the footer}
+
+\begin{frame}{\insertsectionhead}
+	\begin{alertblock}{And what if there is no section?}
+		If a frame is outside any sections, (short) title of the presentation if used. In case this is empty too, author is used.
+	\end{alertblock}
+\end{frame}
+\end{document}
