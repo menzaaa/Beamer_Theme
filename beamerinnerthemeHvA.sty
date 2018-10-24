@@ -1,44 +1,30 @@
-% All rights to the corporate identity of University of Amsterdam and its elements
-% belong to the University of Amsterdam.
-% Please refer to the following page for further information:
-% https://extranet.uva.nl/en/a-z/content/corporate-communication/corporate-communication.html
-%
-% Copyright (c) 2015 Franz Geiger
-%
-% Permission is hereby granted, free of charge, to any person obtaining a copy
-% of this software and associated documentation files (the "Software"), to deal
-% in the Software without restriction, including without limitation the rights
-% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-% copies of the Software, and to permit persons to whom the Software is
-% furnished to do so, subject to the following conditions:
-%
-% The above copyright notice and this permission notice shall be included in
-% all copies or substantial portions of the Software.
-%
-% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
-% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-% THE SOFTWARE.
-
 \mode<presentation>
 
 % Options: Language of university logo
 \DeclareOptionBeamer{logo}[NL]{\def\beamer@innerthemeHvA@logo{#1}}
 \ExecuteOptionsBeamer{logo=ENG}
+
+\DeclareOptionBeamer{richting}[ICT]{\def\beamer@innerthemeHvA@richting{#1}}
+\DeclareOptionBeamer{richting}[TI]{\def\beamer@innerthemeHvA@richting{#1}}
+\DeclareOptionBeamer{richting}[BIM]{\def\beamer@innerthemeHvA@richting{#1}}
+\DeclareOptionBeamer{richting}[GD]{\def\beamer@innerthemeHvA@richting{#1}}
+\DeclareOptionBeamer{richting}[CS]{\def\beamer@innerthemeHvA@richting{#1}}
+\DeclareOptionBeamer{richting}[SE]{\def\beamer@innerthemeHvA@richting{#1}}
+\ExecuteOptionsBeamer{richting=TI}
+
+
 \ProcessOptionsBeamer
 
 % Select logo according to option
 \logo{\includegraphics[width=37.5mm]{beamerthemeHvA/logo/hva_logo_\beamer@innerthemeHvA@logo.pdf}}
+\def\richting{\includegraphics[scale=0.6]{beamerthemeHvA/logo/\beamer@innerthemeHvA@richting.png}}
 
 % Rectangular blocks without shadow
 \setbeamertemplate{blocks}[default]
 
 % Style list items
 \defbeamertemplate*{itemize item}{HvA}{\scriptsize\raise1.25pt\hbox{\color{black}$\bullet$}}
-\defbeamertemplate*{itemize subitem}{HvA}{\tiny\raise1.5pt\hbox{\color{black}$\square$}}
+\defbeamertemplate*{itemize subitem}{HvA}{\tiny\raise1.5pt\hbox{\color{black}$\bullet$}}
 \defbeamertemplate*{itemize subsubitem}{HvA}{\scriptsize\raise1pt\hbox{\color{black}$\bullet$}}
 
 
@@ -50,6 +36,14 @@
 	\begin{tikzpicture}[remember picture,overlay, every node/.style={inner sep=0,outer sep=0}]
 		% HvA logo
 		\node [anchor=north west, xshift=11.8pt, yshift=-11.2pt] (logo) at (0, 0) {\insertlogo};
+	
+		\ifx\beamer@innerthemeHvA@richting\empty
+		
+		\else
+		\node [anchor=north west, xshift=-80pt, yshift=-5pt] (richting) at (current page.north east) {\richting};
+		\fi
+		
+		%\draw[thick,red] (current page.north west) rectangle (current page.south east);
 	
 		% Position of divide between logo and grey box in pt
 		\pgfmathsetmacro{\divide}{-35};
@@ -63,12 +57,7 @@
 		\coordinate [xshift=-\margin pt, yshift=\margin pt] (boxend) at (current page.south east);
 		\coordinate (linestart) at (0pt, \divide pt);
 		\coordinate (lineend)  at (\dividelength pt, \divide pt);
-		
-		
-
-		% Grey box
-		\fill [bgarea] (boxstart) rectangle (boxend);
-		
+		\node [yshift=40pt, xshift=-40pt] (bgimage) at (current page.south east) {\includegraphics[scale=0.2]{beamerthemeHvA/backgrounds/bg1.png}};
 		
 
 \end{tikzpicture}%
@@ -83,9 +72,6 @@
 	% Draw title page
 	
 	\begin{tikzpicture}[remember picture,overlay, every node/.style={inner sep=0,outer sep=0}]	
-		% Show HvA logo
-		%\node [anchor=north west, xshift=11.8pt, yshift=-11.2pt] (logo) at (current page.north west) {\insertlogo};
-
 		% Position of line below logo in pt
 		\pgfmathsetmacro{\divide}{-35};
 		\pgfmathsetmacro{\dividelength}{118.3}
@@ -93,26 +79,23 @@
 		% Margin around boxes in pt
 		\pgfmathsetmacro{\margin}{8.5}; % was 11.5
 
-		% Coordinates for box and line
-		\coordinate [yshift=-70pt] (boxstart) at (current page.north west);
-		\coordinate [xshift=-\margin pt, yshift=\margin pt] (boxend) at (current page.south east);
-		\coordinate [yshift=\divide pt] (linestart) at (current page.north west);
-		\coordinate [xshift=\dividelength pt, yshift=\divide pt] (lineend)  at (current page.north west);
-
-		% Box behind title
-		\coordinate [xshift=\margin pt, yshift=-29pt] (titlebgstart) at (current page.west);
-		\coordinate [yshift=12pt] (titlebgend) at (boxend);
-		\fill [title.bg] (titlebgstart) rectangle (titlebgend);
-
-		% Grey stripe below title
-		\coordinate [xshift=\margin pt, yshift=35pt] (greybarstart) at (current page.south west);
-		\coordinate [yshift=-6pt] (greybarend) at (titlebgend);
-		\fill [black, opacity=.35] (greybarstart) rectangle (greybarend);
 
 		
 		% Title information
 		% Institute
 		%\node [xshift=26.5pt, yshift=-5pt, anchor=north west] (institute) at (linestart) {\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute};
+
+		\coordinate [xshift=-\margin pt, yshift=\margin pt] (boxend) at (current page.south east);
+		\coordinate [xshift=\margin pt] (titlebgstart) at (current page.west);
+		\coordinate [yshift=12pt] (titlebgend) at (boxend);
+		\coordinate [yshift=-70pt] (boxstart) at (current page.north west);
+		
+		\coordinate [yshift=\divide pt] (linestart) at (current page.north west);
+		\coordinate [xshift=\dividelength pt, yshift=\divide pt] (lineend)  at (current page.north west);
+
+		
+		\coordinate [yshift=12pt] (titlebgend) at (boxend);
+
 
 		% Title and subtitle
 		\node [
@@ -136,17 +119,18 @@
 			}
 		};
 		
-
+		
+		
 
 		\pgfmathsetmacro{\authoranddatetop}{-3}
 		% Authors
-		\node [xshift=10pt, yshift=\authoranddatetop pt, anchor=north west] (author) at (greybarstart)
-		{\usebeamercolor[fg]{author}\usebeamerfont{author}
-			\ifx\insertsubtitle\empty\else\insertauthor\fi};
+		%\node [xshift=10pt, yshift=\authoranddatetop pt, anchor=north west] (author) at (greybarstart)
+		%{\usebeamercolor[fg]{author}\usebeamerfont{author}
+		%	\ifx\insertsubtitle\empty\else\insertauthor\fi};
 
 		% Date
-		\node [xshift=\textwidth, yshift=\authoranddatetop pt, align=right, anchor=north east] (date) at (greybarstart)
-		{\usebeamercolor[fg]{date}\usebeamerfont{date}\insertdate};
+		%\node [xshift=\textwidth, yshift=\authoranddatetop pt, align=right, anchor=north east] (date) at (greybarstart)
+		%{\usebeamercolor[fg]{date}\usebeamerfont{date}\insertdate};
 	\end{tikzpicture}%	
 	
 	
